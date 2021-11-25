@@ -1,4 +1,4 @@
-package org.sinou.android.sandbox.android31;
+package org.sinou.android.sandbox.nav.basics;
 
 
 import android.app.Application;

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.sinou.android.sandbox.nav.basics">
+    package="org.sinou.android.sandbox.appbar.basics">
 
     <application
-        android:name=".App"
+        android:name="org.sinou.android.sandbox.appbar.basics.App"
         android:allowBackup="true"
-        android:icon="@drawable/account_plus"
-        android:supportsRtl="false"
+        android:icon="@android:drawable/star_big_on"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DrawerActivity"
+            android:name=".AppBarActivity"
             android:exported="true"
             android:label="Main Activity">
             <intent-filter>

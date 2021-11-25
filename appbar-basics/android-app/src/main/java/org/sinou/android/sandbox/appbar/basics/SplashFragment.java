@@ -1,4 +1,4 @@
-package org.sinou.android.sandbox.android31;
+package org.sinou.android.sandbox.appbar.basics;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,12 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 public class SplashFragment extends Fragment {
 

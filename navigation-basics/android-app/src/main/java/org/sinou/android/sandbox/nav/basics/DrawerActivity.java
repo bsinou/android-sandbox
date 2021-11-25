@@ -1,4 +1,4 @@
-package org.sinou.android.sandbox.android31;
+package org.sinou.android.sandbox.nav.basics;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -71,7 +71,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.drawer_menu, menu);
+        getMenuInflater().inflate(R.menu.more_menu, menu);
         return true;
     }
 

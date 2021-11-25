@@ -11,7 +11,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:label="Browsing"
-        android:name="org.sinou.android.sandbox.nav.basics.SplashFragment"
+        android:name="org.sinou.android.sandbox.appbar.basics.SplashFragment"
         tools:layout="@layout/fragment_splash">
 
     </fragment>
