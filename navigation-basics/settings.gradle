@@ -1,5 +1,5 @@
 /* Insure the name stays constants, even if the root directory name changes */
-rootProject.name = 'android-31'
+rootProject.name = 'navigation-basics'
 rootProject.buildFileName = 'build.gradle'
 
 def timestamp = new Date().format( 'yyyyMMddHHmm' )
