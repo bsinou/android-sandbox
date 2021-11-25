@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <color name="colorPrimary">#ae0001</color>
+    <color name="colorPrimaryVariant">#740001</color>
+    <color name="colorOnPrimary">#ffffff</color>
+    <color name="colorSecondary">#eeba30</color>
+    <color name="colorSecondaryVariant">#d3a625</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorPrimaryDark">#450000</color>
+
+    <color name="colorAccent">#790000</color>
+
+</resources>

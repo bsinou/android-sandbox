@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    app:startDestination="@+id/buttonFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:label="Splash"
+        android:name="org.sinou.android.sandbox.orientation.basics.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+    </fragment>
+
+    <fragment
+        android:id="@+id/buttonFragment"
+        android:label="Button"
+        android:name="org.sinou.android.sandbox.orientation.basics.ButtonFragment"
+        tools:layout="@layout/fragment_button">
+    </fragment>
+
+</navigation>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.sinou.android.sandbox.orientation.basics">
+
+    <application
+        android:name="org.sinou.android.sandbox.orientation.basics.App"
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="org.sinou.android.sandbox.orientation.basics.OrientationActivity"
+            android:exported="true"
+            android:label="Orientation Basics">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
