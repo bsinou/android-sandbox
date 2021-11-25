@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="nav_header_title">Navigation header title</string>
+    <string name="nav_header_subtitle">Navigation header subtitle</string>
+    <string name="nav_header_desc">Navigation header description</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
+</resources>
