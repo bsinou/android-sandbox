@@ -1,9 +1,9 @@
 package org.sinou.android.sandbox.nav.basics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,20 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_dummy);
-//    }
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +29,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_drawer_layout);
 
+        // Replace the default (legacy) action bar by the more recent toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-        // TODO double check this
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,6 +42,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_host_fragment);
+        navController = navHostFragment.getNavController();
+
     }
 
     @Override
@@ -86,12 +76,32 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    private void tmpMsg(int id){
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        Snackbar.make(drawer, "Item menu "+id+" clicked.",
+                Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-//        if (id == R.id.nav_camera) {
+        tmpMsg(id);
+
+        boolean success = false;
+        switch (id){
+            default:
+                // Enable direct reference to a fragment ID from the XML menu definition.
+                success =  NavigationUI.onNavDestinationSelected(item, navController)
+                        || super.onOptionsItemSelected(item);
+
+//            case R.id.nav_to_dummy_tree:
+//                Intent i = new Intent(DrawerActivity.this, DummyTreeFragment.class);
+//                startActivity(i);
+//                break;
+        }
+        //
 //            // Handle the camera action
 //        } else if (id == R.id.nav_gallery) {
 //        } else if (id == R.id.nav_slideshow) {
@@ -99,8 +109,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 //        } else if (id == R.id.nav_share) {
 //        } else if (id == R.id.nav_send) {
 //        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (success){
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+
         return true;
     }
 }

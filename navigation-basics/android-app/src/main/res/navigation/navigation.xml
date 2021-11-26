@@ -6,14 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    app:startDestination="@+id/splashFragment">
+    app:startDestination="@+id/splash_fragment">
 
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@+id/splash_fragment"
         android:label="Browsing"
         android:name="org.sinou.android.sandbox.nav.basics.SplashFragment"
         tools:layout="@layout/fragment_splash">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/dummy_tree_fragment"
+        android:label="List"
+        android:name="org.sinou.android.sandbox.nav.basics.DummyTreeFragment"
+        tools:layout="@layout/fragment_dummy_tree">
     </fragment>
 
 </navigation>

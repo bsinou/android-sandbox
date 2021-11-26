@@ -13,11 +13,14 @@
         android:visible="true">
 
         <menu android:id="@+id/quick_access_menu">
-
             <item
-                android:id="@+id/offline"
+                android:id="@+id/splash_fragment"
+                android:icon="@android:drawable/ic_dialog_info"
+                android:title="Splash" />
+            <item
+                android:id="@+id/dummy_tree_fragment"
                 android:icon="@android:drawable/stat_sys_download_done"
-                android:title="@string/offline_files" />
+                android:title="Dummy tree" />
             <item
                 android:id="@+id/bookmarks"
                 android:icon="@android:drawable/star_off"
