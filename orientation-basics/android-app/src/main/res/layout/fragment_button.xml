@@ -36,11 +36,16 @@
         android:layout_height="wrap_content"
         android:text="Click on the button below to increment, when rotating your device, the count should not be reset to 0" />
 
-    <Button
-        android:id="@+id/incrementor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+1" />
+        <Button
+            android:id="@+id/incrementor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+1" />
+        <Button
+            android:id="@+id/navigate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back to list!" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

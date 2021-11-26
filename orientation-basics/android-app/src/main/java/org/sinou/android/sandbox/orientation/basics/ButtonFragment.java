@@ -10,10 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 public class ButtonFragment extends Fragment {
 
     private static final String STATE_COUNTER = "counter";
+
+    private NavController navController;
 
     private TextView counterDisplay;
     private int mCounter = 0;
@@ -28,6 +32,7 @@ public class ButtonFragment extends Fragment {
             // This could be generic things like an ID that our Fragment represents
             mCounter = savedInstanceState.getInt(STATE_COUNTER, 0);
         }
+
     }
 
     @Override
@@ -49,6 +54,8 @@ public class ButtonFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        navController = Navigation.findNavController(view);
         counterDisplay = (TextView) view.findViewById(R.id.countDisplay);
 
         Button btn = view.findViewById(R.id.incrementor);
@@ -58,6 +65,14 @@ public class ButtonFragment extends Fragment {
                 mCounter++;
                 counterDisplay.setText(String.valueOf(mCounter));
                 System.out.println("plus one clicked" );
+            }
+        });
+
+        Button btn2 = view.findViewById(R.id.navigate);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.list_fragment);
             }
         });
     }

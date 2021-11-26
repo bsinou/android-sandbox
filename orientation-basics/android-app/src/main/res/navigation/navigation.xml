@@ -6,20 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    app:startDestination="@+id/buttonFragment">
+    app:startDestination="@+id/list_fragment">
+
+    <action android:id="@+id/action_global_button_fragment"
+        app:destination="@id/button_fragment"/>
 
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@+id/splash_fragment"
         android:label="Splash"
         android:name="org.sinou.android.sandbox.orientation.basics.SplashFragment"
         tools:layout="@layout/fragment_splash">
     </fragment>
 
     <fragment
-        android:id="@+id/buttonFragment"
+        android:id="@+id/button_fragment"
         android:label="Button"
         android:name="org.sinou.android.sandbox.orientation.basics.ButtonFragment"
         tools:layout="@layout/fragment_button">
+    </fragment>
+
+    <fragment
+        android:id="@+id/list_fragment"
+        android:label="List"
+        android:name="org.sinou.android.sandbox.orientation.basics.ListFragment"
+        tools:layout="@layout/fragment_list">
     </fragment>
 
 </navigation>

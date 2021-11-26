@@ -16,8 +16,7 @@ But also:
 
 - A nice [Blog Post](https://medium.com/hootsuite-engineering/handling-orientation-changes-on-android-41a6b62cb43f)
 
-About Theme customizing (to be moved in the corresponding subproject):
+About Theme customizing and other things(to be moved in the corresponding subproject):
 
 - This [Blog post by the creator of AppCompat](https://chris.banes.dev/theme-vs-style/)
-- this [question on StackOverflow](https://stackoverflow.com/questions/27238433/when-should-one-use-theme-appcompat-vs-themeoverlay-appcompat) 
-  
+- This [question on StackOverflow](https://stackoverflow.com/questions/27238433/when-should-one-use-theme-appcompat-vs-themeoverlay-appcompat) 

@@ -1,12 +1,30 @@
 <?xml version= "1.0" encoding= "utf-8" ?>
 
 <menu
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    tools:showIn="AppBarActivity">
+    >
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_favorite"
+        android:icon="@android:drawable/btn_star"
+        android:title="Favorite"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/splash_fragment"
+        android:icon="@android:drawable/stat_sys_download"
+        android:title="Splash"
+        app:showAsAction="ifRoom"/>
+
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/action_settings"
+        android:title="Settings"
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/first_item"
@@ -25,11 +43,11 @@
         </menu>
     </item>
 
-    <item
+<!--    <item
         android:id="@+id/my_workspaces"
         android:title="Item_2"
         android:visible="true"
         app:showAsAction="always">
-    </item>
+    </item>-->
 
 </menu>
