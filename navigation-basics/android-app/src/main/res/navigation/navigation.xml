@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    app:startDestination="@+id/splash_fragment">
+    app:startDestination="@+id/recycler_fragment">
 
     <fragment
         android:id="@+id/splash_fragment"
@@ -17,10 +17,17 @@
     </fragment>
 
     <fragment
-        android:id="@+id/dummy_tree_fragment"
+        android:id="@+id/dummy_list_fragment"
         android:label="List"
-        android:name="org.sinou.android.sandbox.nav.basics.DummyTreeFragment"
-        tools:layout="@layout/fragment_dummy_tree">
+        android:name="org.sinou.android.sandbox.nav.basics.DummyListFragment"
+        tools:layout="@layout/fragment_dummy_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/recycler_fragment"
+        android:label="Recycler View"
+        android:name="org.sinou.android.sandbox.nav.basics.RecyclerFragment"
+        tools:layout="@layout/fragment_recycler">
     </fragment>
 
 </navigation>

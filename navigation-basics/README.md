@@ -9,9 +9,15 @@ Basically it provides a dummy view that is embedded in a navigation layout that 
 A list of article that have proven being useful:
 
 - This [article](https://guides.codepath.com/android/Fragment-Navigation-Drawer) explains clearly the base concepts of the navigation drawer. 
+
+In the official documentation:
+
 - About [creating a fragment](https://developer.android.com/guide/fragments/create)
 - Android guide for [Actions](https://developer.android.com/training/appbar/actions) 
+- About [navigation](https://developer.android.com/guide/navigation/navigation-navigate)
 
+- [A tutorial, but in Kotlin](https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component#1)...
+  
 About the Toolbar:
 
 - This one [at least for the effort :)](https://abhiandroid.com/materialdesign/toolbar)

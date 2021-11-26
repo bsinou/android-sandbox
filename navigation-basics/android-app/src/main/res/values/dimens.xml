@@ -14,7 +14,14 @@
     <dimen name="nav_margin">8dp</dimen>
     <dimen name="nav_padding">24dp</dimen>
 
+    <!-- FAB -->
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Recycler view -->
+
+    <!-- 1. List -->
+    <dimen name="list_item_margin">16dp</dimen>
+
 
     <!-- New browser -->
     <dimen name="listNodeRowHeight">72dp</dimen>

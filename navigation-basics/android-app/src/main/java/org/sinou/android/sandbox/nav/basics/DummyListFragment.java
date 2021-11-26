@@ -2,11 +2,14 @@ package org.sinou.android.sandbox.nav.basics;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,9 +18,9 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 /**
- * Basic fragment that display a dummy tree to experiment with back and home buttons.
+ * Basic list that display a dummy tree to experiment with back and home buttons.
  */
-public class DummyTreeFragment extends Fragment {
+public class DummyListFragment extends Fragment {
 
     private static final String STATE_ID = "id";
     private static final String STATE_ITEMS = "items";
@@ -30,12 +33,17 @@ public class DummyTreeFragment extends Fragment {
     private ListView mListView;
     private ArrayAdapter<String> mAdapter;
 
+    public DummyListFragment(){
+        // Necessary to have a custom menu only specific to this fragment
+        setHasOptionsMenu(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentRoot = inflater.inflate(R.layout.fragment_dummy_tree, container, false);
+        fragmentRoot = inflater.inflate(R.layout.fragment_dummy_list, container, false);
 
         if (savedInstanceState != null) {
-            mId = savedInstanceState.getLong(STATE_ID, 0);
+            mId = savedInstanceState.getInt(STATE_ID, 0);
         }
 
         // Get references to some views
@@ -50,6 +58,8 @@ public class DummyTreeFragment extends Fragment {
                         .setAction("Action", null).show();
             }
         });
+
+        setHasOptionsMenu(true);
 
         return fragmentRoot;
     }
@@ -78,6 +88,12 @@ public class DummyTreeFragment extends Fragment {
             // DON'T try to restore ListViews here because their scroll position will
             // not be restored properly
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.more_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

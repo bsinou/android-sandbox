@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DummyTreeFragment" android:label="Dummy Tree" />
+        <activity android:name=".DummyListFragment" android:label="Dummy Tree" />
 
     </application>
 </manifest>
