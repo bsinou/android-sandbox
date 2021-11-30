@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class RecyclerListItemAdapter extends RecyclerView.Adapter<ItemRowViewHolder> {
 
-    private static final String TAG = "BrowserAdapter";
+    private static final String TAG = "RecyclerListAdap";
     private final Item parentItem;
 
     private NavController navController;
@@ -39,19 +39,20 @@ public class RecyclerListItemAdapter extends RecyclerView.Adapter<ItemRowViewHol
      * @param parentItem
      */
     public RecyclerListItemAdapter(@NonNull NavController navController, Item parentItem) {
+        this.navController = navController;
         this.parentItem = parentItem;
         items = new Item[]{};
     }
 
-    public void setAllData(Item[] dataSet) {
-        items = dataSet;
-    }
+//    public void setAllData(Item[] dataSet) {
+//        items = dataSet;
+//    }
 
     /**
      * Create new views (invoked by the layout manager)
      */
     @Override
-    public ItemRowViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ItemRowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.view_item_row, viewGroup, false);
         return new ItemRowViewHolder(navController, v);

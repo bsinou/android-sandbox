@@ -1,9 +1,11 @@
 package org.sinou.android.sandbox.nav.basics;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 /**
  * Experiment with latest {@link RecyclerView}
@@ -33,6 +37,7 @@ public class RecyclerFragment extends Fragment {
 
     protected LayoutManagerType mCurrentLayoutManagerType;
 
+    protected View rootView;
     protected RecyclerView mView;
     protected RecyclerListItemAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -82,16 +87,15 @@ public class RecyclerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recycler, container, false);
+        rootView = inflater.inflate(R.layout.fragment_recycler, container, false);
         rootView.setTag(TAG);
 
-        mView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
-
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
@@ -167,6 +171,20 @@ public class RecyclerFragment extends Fragment {
         // TODO Also notify background activities
 
         return true;
+    }
+
+    protected void showMenuFor(Item item){
+        Log.i(TAG, "Show menu for " + item.title);
+
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(rootView.findViewById(R.id.bottom_sheet));
+
+        // behavior.
+
+        // Finally show the menu
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+        System.out.println("More button clicked for " + item.title);
+
     }
 
 }

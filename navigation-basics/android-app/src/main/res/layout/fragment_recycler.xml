@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<!--
+<LinearLayout
+
+    android:id="@+id/recycler_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/sample_main_layout">
+    android:orientation="vertical">
 
-<androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+-->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    tools:context="org.sinou.android.sandbox.nav.basics.DrawerActivity">
+
+
+    <!-- Screen content -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</LinearLayout>
+    <!-- Scrim to block background when the bottom drawer is up -->
+<!--
+    <FrameLayout
+        android:id="@+id/scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <TextView
+            android:id="@+id/bottom_drawer_dummy_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello bottom drawer" />
+
+    </com.google.android.material.navigation.NavigationView>
+-->
+
+    <!-- include bottom sheet -->
+    <include layout="@layout/node_drawer_layout" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

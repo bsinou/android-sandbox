@@ -66,6 +66,8 @@
     <!-- More button -->
     <ImageView
         android:id="@+id/listItemMore"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/listIconMargin"
         android:layout_width="@dimen/listIconSize"
         android:layout_height="@dimen/listIconSize"
         android:contentDescription="Display menu for this item"

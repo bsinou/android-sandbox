@@ -18,8 +18,10 @@ In the official documentation:
 
 - [A tutorial, but in Kotlin](https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component#1)...
   
-About the Toolbar:
+About bars and menus:
 
+- https://material.io/develop/android/components/bottom-sheet-dialog-fragment
+- [Short intro to bottom sheet](https://medium.com/android-bits/android-bottom-sheet-30284293f066) on Medium 
 - This one [at least for the effort :)](https://abhiandroid.com/materialdesign/toolbar)
 
 About the coordinator layout:
