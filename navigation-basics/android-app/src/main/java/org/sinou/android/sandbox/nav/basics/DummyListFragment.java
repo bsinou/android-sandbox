@@ -12,7 +12,6 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -33,31 +32,24 @@ public class DummyListFragment extends Fragment {
     private ListView mListView;
     private ArrayAdapter<String> mAdapter;
 
-    public DummyListFragment(){
+    public DummyListFragment() {
         // Necessary to have a custom menu only specific to this fragment
         setHasOptionsMenu(true);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentRoot = inflater.inflate(R.layout.fragment_dummy_list, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
             mId = savedInstanceState.getInt(STATE_ID, 0);
         }
 
-        // Get references to some views
+        fragmentRoot = inflater.inflate(R.layout.fragment_dummy_list, container, false);
         mListView = (ListView) fragmentRoot.findViewById(R.id.list_items);
-
-        FloatingActionButton fab = fragmentRoot.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fragmentRoot.findViewById(R.id.fab)
+                .setOnClickListener(view ->
+                        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show());
 
         setHasOptionsMenu(true);
 

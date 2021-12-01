@@ -43,7 +43,7 @@ public class ItemRowViewHolder extends RecyclerView.ViewHolder {
     public void setData(Item item) {
         this.item = item;
         titleView.setText(item.title);
-        //descView.setText();
+        descView.setText(item.description);
     }
 
     private class ItemClickedListener implements View.OnClickListener {
@@ -51,7 +51,14 @@ public class ItemRowViewHolder extends RecyclerView.ViewHolder {
         @Override
         public void onClick(View v) {
             System.out.println("Navigate to " + item.title);
-            navController.navigate(R.id.recycler_fragment);
+            String title = item.title;
+
+//            outState.putInt(STATE_ID, (int) (System.currentTimeMillis() / 1000000));
+//            outState.putSerializable(STATE_ITEMS, mItems);
+
+            RecyclerFragmentDirections.OpenItem openItemAction = RecyclerFragmentDirections.openItem();
+            openItemAction.setItemTitle(item.title);
+            navController.navigate(openItemAction);
             // intent.setClass(App.context(), BrowserActivity.class);
             // intent.putExtra(GuiNames.EXTRA_STATE, (new State(parentState.getAccountID(), fileNode)).toString());
             // App.context().startActivity(intent);

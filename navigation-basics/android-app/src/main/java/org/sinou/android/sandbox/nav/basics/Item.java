@@ -1,13 +1,16 @@
 package org.sinou.android.sandbox.nav.basics;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Item {
 
+    private final static Random generator = new Random(System.currentTimeMillis());
+
     String title;
     String description;
-    int timeStamp;
-    int size;
+    long timeStamp;
+    long size;
     String localUri;
 
     Item(String title) {
@@ -22,11 +25,18 @@ public class Item {
         this.localUri = localUri;
     }
 
+    public static Item createChild(Item parent, int id) {
+        Item curr = new Item(parent.title + "-" + id);
+        curr.description = "Description for " + curr.title;
+        curr.timeStamp = System.currentTimeMillis()/1000;
+        curr.size = generator.nextInt()/1000;
+        return curr;
+    }
+
     public static Item[] getItems(Item parent) {
         ArrayList<Item> mItems = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            Item curr = new Item(parent.title + "-" + i);
-            mItems.add(curr);
+            mItems.add(createChild(parent, i));
         }
         return mItems.toArray(new Item[50]);
     }

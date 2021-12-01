@@ -28,6 +28,13 @@
         android:label="Recycler View"
         android:name="org.sinou.android.sandbox.nav.basics.RecyclerFragment"
         tools:layout="@layout/fragment_recycler">
+        <argument
+            android:name="itemTitle"
+            app:argType="string"
+            android:defaultValue="Test" />
+        <action
+            android:id="@+id/openItem"
+            app:destination="@+id/recycler_fragment"/>
     </fragment>
 
 </navigation>

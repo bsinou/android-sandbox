@@ -45,7 +45,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_host_fragment);
         navController = navHostFragment.getNavController();
-
     }
 
     @Override

@@ -5,14 +5,15 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath "com.android.tools.build:gradle:7.0.3"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
     }
 }
 
 plugins {
     // Publish the generated resources as Maven Artifacts.
-    // See: https://docs.gradle.org/current/userguide/publishing_setup.html#publishing_overview and: https://docs.gradle.org/current/userguide/dependency_management_terminology.html#sub:terminology_component
     id 'maven-publish'
+
 }
 
 // Retrieve local context
@@ -35,11 +36,7 @@ ext {
 allprojects {
 
     repositories {
-
-        // Typically useful when working on the Java SDK so that we can use updated code without publishing to bintray.
         mavenLocal()
-
-        // Using both google and maven Central to resolve dependencies.
         google()
         mavenCentral()
     }
