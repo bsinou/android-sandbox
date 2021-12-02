@@ -1,5 +1,6 @@
 package org.sinou.android.sandbox.nav.basics;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,7 +31,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
  */
 public class RecyclerFragment extends Fragment {
 
-    private static final String TAG = "BrowserViewGroup";
+    private static final String TAG = "RecyclerFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 
     private NavController navController;
@@ -66,7 +67,7 @@ public class RecyclerFragment extends Fragment {
 
         // TODO cleanly manage full item retrieval
         String title = RecyclerFragmentArgs.fromBundle(getArguments()).getItemTitle();
-        setState(new Item(title));
+        updateParentState(new Item(title));
     }
 
     @Override
@@ -77,7 +78,7 @@ public class RecyclerFragment extends Fragment {
 
         mView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
-        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
+        // LinearLayoutManager is used here, tguide/topics/ui/declaring-layout.htmlhis will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -91,9 +92,14 @@ public class RecyclerFragment extends Fragment {
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
         navController = NavHostFragment.findNavController(this);
-        mAdapter = new RecyclerListItemAdapter(navController, parentItem, items);
+
+        ActionBar bar = getActivity().getActionBar();
+        if (bar != null){
+            bar.setTitle(parentItem.title);
+        }
 
         // Set CustomAdapter as the adapter for RecyclerView.
+        mAdapter = new RecyclerListItemAdapter(navController, parentItem, items);
         mView.setAdapter(mAdapter);
 
         return rootView;
@@ -115,26 +121,6 @@ public class RecyclerFragment extends Fragment {
 
         bottomView = rootView.findViewById(R.id.bottom_sheet);
         behavior = BottomSheetBehavior.from(bottomView);
-
-    }
-
-    /**
-     * Tell the browser about the current Session. This method **must** be called
-     * between onCreate() and onStart() life cycle hooks.
-     *
-     * @return true if session has changed
-     */
-
-    public boolean setState(@NonNull Item state) {
-        boolean hasChanged = false;
-
-        if (!state.equals(parentItem)) {
-            updateParentState(state);
-            hasChanged = true;
-        }
-
-        parentItem = state;
-        return hasChanged;
     }
 
     @Override

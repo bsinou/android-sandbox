@@ -11,11 +11,6 @@
 
     >
 
-    <!--    app:behavior_hideable="true"-->
-    <!--    app:behavior_peekHeight="-1dp"-->
-    <!--    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"-->
-
-
     <TextView
         android:id="@+id/menu_title"
         android:layout_width="match_parent"

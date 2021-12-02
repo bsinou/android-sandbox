@@ -39,3 +39,7 @@ About the Recycler View:
 About images:
 
 - an [intro to the SVG format](https://www.w3schools.com/graphics/svg_intro.asp)
+
+A complete android crash course (change numbers at the end of the URL to browse to next lesson)
+
+- https://www.cs.dartmouth.edu/~campbell/cs65/lecture02/lecture02.html

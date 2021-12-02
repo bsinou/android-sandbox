@@ -1,6 +1,5 @@
 package org.sinou.android.sandbox.nav.basics;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +30,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         // Replace the default (legacy) action bar by the more recent toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,16 +66,16 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        System.out.println("###### Options Item selected: "+ item.getItemId());
+        System.out.println("###### Options Item selected: " + item.getItemId());
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
         return super.onOptionsItemSelected(item);
     }
 
-    private void tmpMsg(int id){
+    private void tmpMsg(int id) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        Snackbar.make(drawer, "Item menu "+id+" clicked.",
+        Snackbar.make(drawer, "Item menu " + id + " clicked.",
                 Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
 
@@ -88,10 +87,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         tmpMsg(id);
 
         boolean success = false;
-        switch (id){
+        switch (id) {
             default:
                 // Enable direct reference to a fragment ID from the XML menu definition.
-                success =  NavigationUI.onNavDestinationSelected(item, navController)
+                success = NavigationUI.onNavDestinationSelected(item, navController)
                         || super.onOptionsItemSelected(item);
 
 //            case R.id.nav_to_dummy_tree:
@@ -107,7 +106,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 //        } else if (id == R.id.nav_share) {
 //        } else if (id == R.id.nav_send) {
 //        }
-        if (success){
+        if (success) {
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         }
