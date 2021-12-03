@@ -1,0 +1,68 @@
+buildscript {
+
+    ext.kotlin_version = '1.6.0'
+    ext.navigation_safe_args = '2.3.5'
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_safe_args"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id 'maven-publish'
+}
+
+def versionProperties = new Properties()
+versionProperties.load(new FileInputStream(rootProject.file("versions.properties")))
+
+// Expose custom properties to all modules in the project.
+ext {
+    githubUrl = 'https://github.com/bsinou/android-sandbox.git'
+
+    // Expose properties retrieved from files to child projects
+    ownVersions = versionProperties
+}
+
+allprojects {
+
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+    }
+}
+
+
+/* Factorise some of the methods used in various sub projects */
+
+// Pre-create generic common pom configuration:
+ext.getBasePom = { repoURL  ->
+    return {
+        licenses {
+            license {
+                name "The Apache Software License, Version 2.0"
+                url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id "bsinou"
+                name "Bruno Sinou"
+                email "bruno.sinou@posteo.de"
+            }
+        }
+
+        scm {
+            url repoURL
+        }
+    }
+}

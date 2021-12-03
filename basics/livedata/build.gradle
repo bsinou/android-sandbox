@@ -1,0 +1,59 @@
+plugins {
+    id 'com.android.application'
+    id 'androidx.navigation.safeargs'
+}
+
+android {
+    compileSdkVersion ownVersions['android.sdk.compile'] as int
+    buildToolsVersion ownVersions['android.build.tools']
+
+    defaultConfig {
+        minSdkVersion ownVersions['android.sdk.min'] as int
+        targetSdkVersion ownVersions['android.sdk.target'] as int
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            versionNameSuffix = '-dev'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests {
+            // Encapsulates options for controlling how Gradle executes local unit tests. For a list
+            // of all the options you can specify, read Gradle's reference documentation: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/Test.html
+
+            // Avoid RuntimeException of type: Method w in android.util.Log not mocked. See http://g.co/androidstudio/not-mocked for details.
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
+    
+    lintOptions {
+        abortOnError false
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'com.google.android.material:material:1.4.0'
+
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
+
+}

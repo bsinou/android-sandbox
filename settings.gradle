@@ -1,0 +1,37 @@
+/* Insure the name stays constants, even if the root directory name changes */
+rootProject.name = 'android-sandbox'
+rootProject.buildFileName = 'build.gradle'
+
+def timestamp = new Date().format( 'yyyyMMddHHmm' )
+println('[DEBUG] Starting init phase for ' + rootProject.name + ' at ' + timestamp)
+
+include ':basics:livedata', ':basics:appbar', ':basics:orientation', ':basics:navigation'
+
+// TODO Make the include dynamic plug ability to change the gradle file name ...
+/*
+def allProjects = "";
+
+
+new File(rootDir, "basics").listFiles().each {
+   if (it.directory && new File(it, 'build.gradle').exists())
+   {
+      allProjects += "'"+":basics:${it.name}"+"', "
+      println('[DEBUG]  curr all proj: ' + allProjects)
+   }
+}
+*/
+
+/* Use custom names for the "build.gradle" file of child modules */
+// new File(rootDir, "sandbox").listFiles().each {
+//    if (it.directory && new File(it, it.name +'.gradle').exists())
+//    {
+    //   include ":sandbox:${it.name}";
+        // it.buildFileName = it.name + '.gradle'
+// 
+//    }
+// }
+
+// rootProject.children.each {
+//     it.buildFileName = it.name + '.gradle'
+//     //println('[DEBUG] New build.gradle build script file name: ' + it.buildFileName)
+// }
