@@ -30,7 +30,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         // Replace the default (legacy) action bar by the more recent toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-       setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
