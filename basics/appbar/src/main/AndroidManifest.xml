@@ -3,20 +3,32 @@
     package="org.sinou.android.sandbox.appbar.basics">
 
     <application
-        android:name="org.sinou.android.sandbox.appbar.basics.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@android:drawable/star_big_on"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity
-            android:name=".AppBarActivity"
+            android:name=".NavDrawerActivity"
             android:exported="true"
-            android:label="Main Activity">
+            android:label="@string/title_activity_nav_drawer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AppBarActivity"
+            android:exported="true"
+            android:label="Main Activity">
+            <!--            <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>-->
+        </activity>
     </application>
+
 </manifest>
