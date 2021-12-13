@@ -5,7 +5,8 @@ rootProject.buildFileName = 'build.gradle'
 def timestamp = new Date().format( 'yyyyMMddHHmm' )
 println('[DEBUG] Starting init phase for ' + rootProject.name + ' at ' + timestamp)
 
-include ':basics:livedata', ':basics:appbar', ':basics:orientation', ':basics:navigation'
+include ':basics:livedata', ':basics:appbar', ':basics:orientation', ':basics:navigation', ':basics:kotlin'
+
 
 // TODO Make the include dynamic plug ability to change the gradle file name ...
 /*
