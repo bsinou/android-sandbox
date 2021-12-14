@@ -16,7 +16,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.navigation">
+    package="org.sinou.android.sandbox.course.navigation">
 
     <application
         android:allowBackup="true"
