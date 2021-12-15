@@ -17,11 +17,14 @@
 package org.sinou.android.sandbox.course.guesstheword.screens.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import org.sinou.android.sandbox.course.guesstheword.R
 import org.sinou.android.sandbox.course.guesstheword.databinding.GameFragmentBinding
 
@@ -30,21 +33,25 @@ import org.sinou.android.sandbox.course.guesstheword.databinding.GameFragmentBin
  */
 class GameFragment : Fragment() {
 
-    // The current word
-    private var word = ""
+    private val TAG = "GameFragment"
 
-    // The current score
-    private var score = 0
+    private val viewModel: GameViewModel by viewModels()
 
-    // The list of words - the front of the list is the next word to guess
-    private lateinit var wordList: MutableList<String>
+    // Keep state between config changes using bundle
+    // Was the legacy way of doing things
+    // Might prove useful in certain corner case.
+    // private val KEY_SCORE = "GameFragment.score"
+    // private val KEY_CURR_WORD = "GameFragment.CurrentWord"
+    // private val KEY_WORD_LIST = "GameFragment.WordList"
 
+    // Binding to ease access to the views, also much more cost efficient
     private lateinit var binding: GameFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i(TAG, "in onCreateView")
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
@@ -54,91 +61,68 @@ class GameFragment : Fragment() {
             false
         )
 
-        resetList()
-        nextWord()
+        // This does not work anymore with recent version of the LifeCycle lib
+        // viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
+        // Variant that use bundle
+        // if (savedInstanceState != null){
+        //     score = savedInstanceState.getInt(KEY_SCORE, 0)
+        //     word = savedInstanceState.getString(KEY_CURR_WORD, "")
+        //     val tmp = savedInstanceState.getStringArrayList(KEY_WORD_LIST)
+        //     if (tmp != null && !tmp.isEmpty()){
+        //         wordList = tmp.toMutableList()
+        //     } else {
+        //         wordList = mutableListOf()
+        //     }
+        // } else {
+        //     resetList()
+        //     nextWord()
+        // }
+
+        binding.correctButton.setOnClickListener {
+            viewModel.onCorrect()
+            updateScoreText()
+            updateWordText()
+        }
+        binding.skipButton.setOnClickListener {
+            viewModel.onSkip()
+            updateScoreText()
+            updateWordText()
+        }
+
+        // Init UI
         updateScoreText()
         updateWordText()
+
         return binding.root
-
     }
 
-    /**
-     * Resets the list of words and randomizes the order
-     */
-    private fun resetList() {
-        wordList = mutableListOf(
-            "queen",
-            "hospital",
-            "basketball",
-            "cat",
-            "change",
-            "snail",
-            "soup",
-            "calendar",
-            "sad",
-            "desk",
-            "guitar",
-            "home",
-            "railway",
-            "zebra",
-            "jelly",
-            "car",
-            "crow",
-            "trade",
-            "bag",
-            "roll",
-            "bubble"
-        )
-        wordList.shuffle()
-    }
+    // override fun onSaveInstanceState(outState: Bundle) {
+    //     super.onSaveInstanceState(outState)
+    //     outState.putInt(KEY_SCORE, score)
+    //     outState.putString(KEY_CURR_WORD, word)
+    //
+    //     val tmpList = ArrayList<String>();
+    //     tmpList.addAll(wordList);
+    //     outState.putStringArrayList(KEY_WORD_LIST, tmpList)
+    // }
 
     /**
      * Called when the game is finished
      */
     private fun gameFinished() {
-        // FIXME adapt to latest navigation principles
-
-//        val action = GameFragmentDirections.actionGameToScore(score)
-//        findNavController(this).navigate(action)
-    }
-
-    /**
-     * Moves to the next word in the list
-     */
-    private fun nextWord() {
-        //Select and remove a word from the list
-        if (wordList.isEmpty()) {
-            gameFinished()
-        } else {
-            word = wordList.removeAt(0)
-        }
-        updateWordText()
-        updateScoreText()
-    }
-
-    /** Methods for buttons presses **/
-
-    private fun onSkip() {
-        score--
-        nextWord()
-    }
-
-    private fun onCorrect() {
-        score++
-        nextWord()
+        val action = GameFragmentDirections.actionGameToScore(viewModel.score)
+        binding.gameLayout.findNavController().navigate(action)
     }
 
     /** Methods for updating the UI **/
 
     private fun updateWordText() {
-        binding.wordText.text = word
+        binding.wordText.text = viewModel.word
 
     }
 
     private fun updateScoreText() {
-        binding.scoreText.text = score.toString()
+        binding.scoreText.text = viewModel.score.toString()
     }
 }

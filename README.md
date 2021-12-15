@@ -24,9 +24,16 @@ Below are some links to internet resources that have prove useful while doing fi
 While following Android's bootcamp, these links seemed worth:
 
 
+##### Lifecycles
+
 - [The Android Lifecycle cheat sheet - part I](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab): Single Activity - This is a visual recap of much of the material here.
 - [The Android Lifecycle cheat sheet - part II](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-ii-multiple-activities-a411fd139f24): Multiple Activities - This shows the order of lifecycle calls when two activities interact.
 - [The Android Lifecycle cheat sheet - part III](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd): Fragments - This show the order of lifecycle calls when an activity and fragment interact.
+
+
+##### Architecture
+
+- [Basic samples based on a TODO app](https://github.com/android/architecture-samples)
 
 
 #### Misceleneous 
