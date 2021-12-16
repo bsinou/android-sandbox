@@ -22,7 +22,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import org.sinou.android.sandbox.course.trackmysleepquality.R
+import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepDatabase
 import org.sinou.android.sandbox.course.trackmysleepquality.databinding.FragmentSleepQualityBinding
 
 /**
@@ -33,19 +38,42 @@ import org.sinou.android.sandbox.course.trackmysleepquality.databinding.Fragment
  */
 class SleepQualityFragment : Fragment() {
 
+    val args: SleepQualityFragmentArgs by navArgs()
+
+
     /**
      * Called when the Fragment is ready to display content to the screen.
      *
      * This function uses DataBindingUtil to inflate R.layout.fragment_sleep_quality.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         // Get a reference to the binding object and inflate the fragment views.
         val binding: FragmentSleepQualityBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sleep_quality, container, false)
+            inflater, R.layout.fragment_sleep_quality, container, false
+        )
 
         val application = requireNotNull(this.activity).application
+
+        val datasource = SleepDatabase.getInstance(application).sleepDatabaseDao
+        val viewModelFactory = SleepQualityViewModelFactory(args.sleepNightKey, datasource)
+
+        val sleepQualityViewModel: SleepQualityViewModel by viewModels { viewModelFactory }
+        binding.sleepQualityViewModel = sleepQualityViewModel
+        binding.setLifecycleOwner(this.viewLifecycleOwner)
+
+        sleepQualityViewModel.navigateToSleepTracker.observe(this, Observer { flag ->
+            flag?.let {
+                this.findNavController().navigate(
+                    SleepQualityFragmentDirections.actionSleepQualityFragmentToSleepTrackerFragment()
+                )
+                sleepQualityViewModel.doneNavigating()
+            }
+        })
+
 
         return binding.root
     }

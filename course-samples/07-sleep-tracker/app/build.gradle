@@ -30,6 +30,9 @@ android {
         versionName "1.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
+        // Otherwise tests are not found and we get a "AssertionFailedError: No tests found in org.sinou...."
+        // exception when we launch the tests
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
