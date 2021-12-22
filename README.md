@@ -33,13 +33,16 @@ While following Android's bootcamp, these links seemed worth:
 
 - [About re-usable layouts](https://developer.android.com/training/improving-layouts/reusing-layouts), sepcifically about `<include />` and `<merge />` tags.
 
-
 ##### Lifecycles
 
 - [The Android Lifecycle cheat sheet - part I](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab): Single Activity - This is a visual recap of much of the material here.
 - [The Android Lifecycle cheat sheet - part II](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-ii-multiple-activities-a411fd139f24): Multiple Activities - This shows the order of lifecycle calls when two activities interact.
 - [The Android Lifecycle cheat sheet - part III](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd): Fragments - This show the order of lifecycle calls when an activity and fragment interact.
 
+##### Coroutines and background work
+
+- the [essential and official Coroutines guide](https://kotlinlang.org/docs/coroutines-guide.html)
+- [Introducing the work manager](https://medium.com/androiddevelopers/introducing-workmanager-2083bcfc4712)
 
 ##### Architecture
 
@@ -47,6 +50,7 @@ While following Android's bootcamp, these links seemed worth:
 
 ##### Room
 
+- [Data and file storage overview](https://developer.android.com/training/data-storage)
 - A good post that [recap state of the art (as of dec. 2021) management of view model](https://proandroiddev.com/optimizing-viewmodel-with-lifecycle-2-2-0-a2895b5c01fd) using the `by viewModels()` pattern.
 - [About migration with Room](https://developer.android.com/training/data-storage/room/migrating-db-versions)
 - On Medium, [Understanding migration with Room](https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929)

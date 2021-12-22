@@ -16,3 +16,28 @@
  */
 
 package org.sinou.android.sandbox.course.devbyteviewer.repository
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.sinou.android.sandbox.course.devbyteviewer.database.VideoDatabase
+import org.sinou.android.sandbox.course.devbyteviewer.database.asDomainModel
+import org.sinou.android.sandbox.course.devbyteviewer.domain.Video
+import org.sinou.android.sandbox.course.devbyteviewer.network.Network
+import org.sinou.android.sandbox.course.devbyteviewer.network.asDatabaseModel
+
+
+class VideosRepository(private val database: VideoDatabase){
+
+    val videos: LiveData<List<Video>> = Transformations.map(database.videoDao.getVideos()){
+        it.asDomainModel()
+    }
+
+    suspend fun refreshVideos(){
+        withContext(Dispatchers.IO){
+            val playlist = Network.devbytes.getPlaylist().await()
+            database.videoDao.insertAll(*playlist.asDatabaseModel())
+        }
+    }
+}
