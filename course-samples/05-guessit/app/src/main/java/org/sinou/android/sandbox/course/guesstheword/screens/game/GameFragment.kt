@@ -54,6 +54,8 @@ class GameFragment : Fragment() {
     ): View {
         Log.i(TAG, "in onCreateView")
 
+        setHasOptionsMenu(true)
+
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,

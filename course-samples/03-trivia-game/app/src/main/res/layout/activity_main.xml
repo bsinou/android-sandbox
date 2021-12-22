@@ -27,13 +27,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--
-                        <fragment
-                            android:id="@+id/fragment_title"
-                            android:name="org.sinou.android.sandbox.course.navigation.TitleFragment"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-            -->
+            <!-- Directly display a fragment without gogin through the Navigation handlers
+                 ==> simply directly set the correct fragment class. -->
+            <!-- <fragment
+                 android:id="@+id/fragment_title"
+                 android:name="org.sinou.android.sandbox.course.navigation.TitleFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" /> -->
+
             <fragment
                 android:id="@+id/nav_host_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -41,7 +42,6 @@
                 android:layout_height="match_parent"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/game" />
-
 
         </LinearLayout>
 
