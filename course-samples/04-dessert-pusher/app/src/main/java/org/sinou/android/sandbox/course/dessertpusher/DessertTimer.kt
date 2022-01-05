@@ -20,7 +20,6 @@ import android.os.Handler
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import org.jetbrains.annotations.ApiStatus
 import timber.log.Timber
 
 /**
@@ -38,7 +37,7 @@ import timber.log.Timber
  * https://developer.android.com/guide/components/processes-and-threads
  *
  */
-class DessertTimer (lifecycle: Lifecycle) : LifecycleObserver {
+class DessertTimer(lifecycle: Lifecycle) : LifecycleObserver {
 
     // The number of seconds counted since the timer started
     var secondsCount = 0
@@ -48,6 +47,7 @@ class DessertTimer (lifecycle: Lifecycle) : LifecycleObserver {
      * or actions (known as [Runnable]s)
      */
     private var handler = Handler()
+    private var isInitialised = false
     private lateinit var runnable: Runnable
 
 
@@ -67,6 +67,7 @@ class DessertTimer (lifecycle: Lifecycle) : LifecycleObserver {
             handler.postDelayed(runnable, 1000)
         }
 
+        isInitialised = true
         // This is what initially starts the timer
         handler.postDelayed(runnable, 1000)
 
@@ -78,6 +79,9 @@ class DessertTimer (lifecycle: Lifecycle) : LifecycleObserver {
     fun stopTimer() {
         // Removes all pending posts of runnable from the handler's queue, effectively stopping the
         // timer
-        handler.removeCallbacks(runnable)
+        //dirty hack to complete the course, even if everything is deprecated
+        if (isInitialised) {
+            handler.removeCallbacks(runnable)
+        }
     }
 }

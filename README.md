@@ -10,6 +10,20 @@ In order to build and use one of the project in this repository, you must
 - Have a Java JDK > 1.8
 - Copy `local.properties.sample` file to `local.properties` and adapt to your setup in the target sub project you want to launch
 
+## Tips and tricks
+
+### Test app killed
+
+To test if your app behaves correctly in case it is killed by the OS, you can use the ADB command line tool:
+
+```sh
+app_id=your.app.id
+adb shell am kill $app_id
+```
+
+Note: If you encounter a command not found error, you must add the path to the tool to your PATH.
+`adb` is part of the Android SDK, which is downloaded as part of Android Studio. You can find the location of this SDK by going to `Tools -> SDK Manager`. The helper tools are in the `platform-tools/` sub folder. 
+
 ## Useful links
 
 Below are some links to internet resources that have prove useful while doing first hops in the wonderful Android world:
