@@ -5,24 +5,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.sinou.android.sandbox.course.trackmysleepquality.R
 import org.sinou.android.sandbox.course.trackmysleepquality.convertDurationToFormatted
 import org.sinou.android.sandbox.course.trackmysleepquality.convertNumericQualityToString
 import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepNight
 
-class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.ViewHolder>() {
+class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()) {
 
-    var data = listOf<SleepNight>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+//    var data = listOf<SleepNight>()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
-    override fun getItemCount() = data.size
+//    override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        // val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
@@ -60,5 +63,19 @@ class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.ViewHolder>() {
                 return ViewHolder(view)
             }
         }
+    }
+}
+
+
+class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>(){
+
+    override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
+        return oldItem.nightId == newItem.nightId
+    }
+
+    override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
+        // Thanks to Room: SleepNight is a @Data class and gets equality based on
+        // equality of each fields (column) for free.
+        return oldItem == newItem
     }
 }
