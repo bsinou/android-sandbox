@@ -64,6 +64,9 @@ class GameFragment : Fragment() {
             false
         )
 
+        binding.gameViewModel = viewModel
+        binding.setLifecycleOwner(this)
+
         // This does not work anymore with recent version of the LifeCycle lib
         // viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
@@ -82,19 +85,21 @@ class GameFragment : Fragment() {
         //     nextWord()
         // }
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        // Directly done in the XML layout
+//        binding.correctButton.setOnClickListener {
+//            viewModel.onCorrect()
+//        }
+//        binding.skipButton.setOnClickListener {
+//            viewModel.onSkip()
+//        }
 
-        viewModel.score.observe(this, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
-        viewModel.word.observe(this, Observer { newWord ->
-            binding.wordText.text = newWord
-        })
+        // Also done in XML Layout **once we have called setLifecycleOwner() method
+//        viewModel.word.observe(this, Observer { newWord ->
+//            binding.wordText.text = newWord
+//        })
+//        viewModel.score.observe(this, Observer { newScore ->
+//            binding.scoreText.text = newScore.toString()
+//        })
         viewModel.timeRemaining.observe(this, Observer { value ->
             binding.timerText.text = value
         })

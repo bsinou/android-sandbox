@@ -19,10 +19,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="score"
-            type="int" />
+            name="scoreViewModel"
+            type="org.sinou.android.sandbox.course.guesstheword.screens.score.ScoreViewModel" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/score_layout"
@@ -54,9 +56,11 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
+            android:text="@{String.valueOf(scoreViewModel.score)}"
             android:textColor="@color/black_text_color"
             android:textSize="34sp"
             android:textStyle="normal"
+
             app:layout_constraintBottom_toTopOf="@+id/play_again_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -70,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            android:onClick="@{() -> scoreViewModel.startNewGame()}"
             android:text="@string/play_again"
             android:theme="@style/GoButton"
             app:layout_constraintBottom_toBottomOf="parent"

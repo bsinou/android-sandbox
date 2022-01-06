@@ -24,29 +24,43 @@ class GameViewModel : ViewModel() {
         const val COUNTDOWN_TIME = 3000L
     }
 
-    private val _timer: CountDownTimer
-
-    private val _timeRemaining = MutableLiveData<String>()
-    val timeRemaining: LiveData<String>
-        get() = _timeRemaining
+    // The current score: we use here the "backing property" pattern so that
+    // we can only update the score value from within the ViewModel.
+    // All other LiveData objects below also use this pattern
+    private val _score = MutableLiveData<Int>()
+    val score: LiveData<Int>
+        get() = _score
 
     // The current word
     private val _word = MutableLiveData<String>()
     val word: LiveData<String>
         get() = _word
 
-    // The current score
-    private val _score = MutableLiveData<Int>()
-    val score: LiveData<Int>
-        get() = _score
+    // The timer
+    private val _timer: CountDownTimer
+    private val _timeRemaining = MutableLiveData<String>()
+    val timeRemaining: LiveData<String>
+        get() = _timeRemaining
 
+    // We could also keep a Long as primary live data and use a Transformations.map
+    // to create a "child" live data that can be directly observed by the layout via the viewModel
+/*
+    private val _currentTime = MutableLiveData<Long>()
+    val currentTime: LiveData<Long>
+        get() = _currentTime
+
+    val currentTimeString = Transformations.map(currentTime, {
+        time -> DateUtils.formatElapsedTime(time)
+    })
+*/
+
+    // Manage an observable "game finished" flag to trigger navigation when it changes
     private val _eventGameFinished = MutableLiveData<Boolean>()
     val eventGameFinished: LiveData<Boolean>
         get() = _eventGameFinished
 
-
     // The list of words - the front of the list is the next word to guess
-    lateinit var wordList: MutableList<String>
+    private lateinit var wordList: MutableList<String>
 
     init {
         Log.i(TAG, "GameViewModel created!")
@@ -68,17 +82,13 @@ class GameViewModel : ViewModel() {
         _timeRemaining.value = DateUtils.formatElapsedTime(COUNTDOWN_TIME / ONE_SECOND)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        _timer.cancel()
-        Log.i(TAG, "GameViewModel destroyed!")
-    }
-
     /**
      * Moves to the next word in the list
      */
     private fun nextWord() {
-        //Select and remove a word from the list
+        // Select and remove a word from the list
+        // In the finished version of the app, we rely on the timer to finish the game,
+        // so when the list is empty, we simply "re-fill" it.
         if (wordList.isEmpty()) {
             resetList()
         }
@@ -95,6 +105,9 @@ class GameViewModel : ViewModel() {
 //        }
 //    }
 
+    fun onGameFinishComplete() {
+        _eventGameFinished.value = false
+    }
 
     /** Methods for buttons presses **/
 
@@ -108,6 +121,11 @@ class GameViewModel : ViewModel() {
         nextWord()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        _timer.cancel()
+        Log.i(TAG, "GameViewModel destroyed!")
+    }
 
     /**
      * Resets the list of words and randomizes the order
@@ -137,9 +155,5 @@ class GameViewModel : ViewModel() {
             "bubble"
         )
         wordList.shuffle()
-    }
-
-    fun onGameFinishComplete() {
-        _eventGameFinished.value = false
     }
 }

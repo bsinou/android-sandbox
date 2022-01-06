@@ -16,12 +16,22 @@ class ScoreViewModel(finalScore: Int) : ViewModel() {
         get() = _score
 
     init {
-        Log.i(TAG, "initializing...")
+        Log.i(TAG, "Creating VM, final score: ${finalScore}")
         _score.value = finalScore
     }
 
+    // Manage an observable "play again event" flag to trigger navigation when it changes
+    private val _eventPlayAgain = MutableLiveData<Boolean>()
+    val eventPlayAgain: LiveData<Boolean>
+        get() = _eventPlayAgain
 
+    fun startNewGame(){
+        _eventPlayAgain.value = true
+    }
 
+    fun navigationToNewGameDone(){
+        _eventPlayAgain.value = false
+    }
 }
 
 

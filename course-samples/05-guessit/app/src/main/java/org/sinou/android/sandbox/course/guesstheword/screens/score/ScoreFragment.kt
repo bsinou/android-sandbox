@@ -22,6 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import org.sinou.android.sandbox.course.guesstheword.R
@@ -32,29 +34,50 @@ import org.sinou.android.sandbox.course.guesstheword.databinding.ScoreFragmentBi
  */
 class ScoreFragment : Fragment() {
 
+    private lateinit var viewModel: ScoreViewModel
+    private lateinit var vmFactory: ScoreViewModelFactory
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         // Inflate view and obtain an instance of the binding class.
         val binding: ScoreFragmentBinding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.score_fragment,
-                container,
-                false
+            inflater,
+            R.layout.score_fragment,
+            container,
+            false
         )
 
         // Get args using by navArgs property delegate
         val scoreFragmentArgs by navArgs<ScoreFragmentArgs>()
-        binding.scoreText.text = scoreFragmentArgs.score.toString()
-        binding.playAgainButton.setOnClickListener { onPlayAgain() }
+
+        vmFactory = ScoreViewModelFactory(scoreFragmentArgs.score)
+        val tmpModel: ScoreViewModel by viewModels { vmFactory }
+        viewModel = tmpModel
+
+
+        // Done in the XML layout via binding
+        // viewModel.score.observe(this, Observer {
+        //     binding.scoreText.text = it.toString()
+        // })
+        // binding.playAgainButton.setOnClickListener { onPlayAgain() }
+
+        binding.scoreViewModel = viewModel
+
+        viewModel.eventPlayAgain.observe(this, {
+            if (it) {
+                val action = ScoreFragmentDirections.actionRestart()
+                binding.scoreLayout.findNavController().navigate(action)
+                // This raises an IllegalArgumentException
+                // findNavController().navigate(ScoreFragmentDirections.actionRestart())
+
+                viewModel.navigationToNewGameDone()
+            }
+        })
 
         return binding.root
-    }
-
-    private fun onPlayAgain() {
-        findNavController().navigate(ScoreFragmentDirections.actionRestart())
     }
 }
