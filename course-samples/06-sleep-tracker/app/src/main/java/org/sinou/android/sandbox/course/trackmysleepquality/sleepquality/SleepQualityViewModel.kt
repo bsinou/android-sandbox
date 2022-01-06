@@ -21,17 +21,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepDatabaseDao
-import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepNight
 
 class SleepQualityViewModel(
-    private val sleepNightKey: Long = 0L,
-    val database: SleepDatabaseDao
+    private val sleepNightKey: Long,
+    private val database: SleepDatabaseDao
 ) : ViewModel() {
 
+    // LifeCycle and scopes
     private val viewModelJob = Job()
-
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    // Navigation flag
     private val _navigateToSleepTracker = MutableLiveData<Boolean?>()
     val navigateToSleepTracker: LiveData<Boolean?>
         get() = _navigateToSleepTracker
@@ -43,9 +43,9 @@ class SleepQualityViewModel(
     fun onSetSleepQuality(quality: Int){
         uiScope.launch {
             withContext(Dispatchers.IO){
-                val tonight = database.get(sleepNightKey) ?: return@withContext
-                tonight.sleepQuality = quality
-                database.update(tonight)
+                val currNight = database.get(sleepNightKey)
+                currNight.sleepQuality = quality
+                database.update(currNight)
             }
             _navigateToSleepTracker.value = true
         }
@@ -55,5 +55,4 @@ class SleepQualityViewModel(
         super.onCleared()
         viewModelJob.cancel()
     }
-
 }

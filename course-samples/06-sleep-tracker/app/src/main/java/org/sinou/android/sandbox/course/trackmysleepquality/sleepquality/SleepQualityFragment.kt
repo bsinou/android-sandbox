@@ -38,9 +38,6 @@ import org.sinou.android.sandbox.course.trackmysleepquality.databinding.Fragment
  */
 class SleepQualityFragment : Fragment() {
 
-    val args: SleepQualityFragmentArgs by navArgs()
-
-
     /**
      * Called when the Fragment is ready to display content to the screen.
      *
@@ -56,24 +53,24 @@ class SleepQualityFragment : Fragment() {
             inflater, R.layout.fragment_sleep_quality, container, false
         )
 
+        // Do the piping
+        val args: SleepQualityFragmentArgs by navArgs()
         val application = requireNotNull(this.activity).application
-
         val datasource = SleepDatabase.getInstance(application).sleepDatabaseDao
         val viewModelFactory = SleepQualityViewModelFactory(args.sleepNightKey, datasource)
-
         val sleepQualityViewModel: SleepQualityViewModel by viewModels { viewModelFactory }
         binding.sleepQualityViewModel = sleepQualityViewModel
-        binding.setLifecycleOwner(this.viewLifecycleOwner)
+        binding.lifecycleOwner = viewLifecycleOwner
 
+        // Navigate (back?) to the tracker once the quality has been set
         sleepQualityViewModel.navigateToSleepTracker.observe(this, Observer { flag ->
             flag?.let {
-                this.findNavController().navigate(
+                findNavController().navigate(
                     SleepQualityFragmentDirections.actionSleepQualityFragmentToSleepTrackerFragment()
                 )
                 sleepQualityViewModel.doneNavigating()
             }
         })
-
 
         return binding.root
     }

@@ -68,6 +68,7 @@ While following Android's bootcamp, these links seemed worth:
 #### Room
 
 - [Data and file storage overview](https://developer.android.com/training/data-storage)
+- an overview of [all Room annotations](https://developer.android.com/reference/android/arch/persistence/room/package-summary#annotations)
 - A good post that [recap state of the art (as of dec. 2021) management of view model](https://proandroiddev.com/optimizing-viewmodel-with-lifecycle-2-2-0-a2895b5c01fd) using the `by viewModels()` pattern.
 - [About migration with Room](https://developer.android.com/training/data-storage/room/migrating-db-versions)
 - On Medium, [Understanding migration with Room](https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929)

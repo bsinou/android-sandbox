@@ -124,7 +124,5 @@
             app:layout_constraintTop_toTopOf="@+id/quality_four_image"
             app:srcCompat="@drawable/ic_sleep_5"
             android:onClick="@{() -> sleepQualityViewModel.onSetSleepQuality(5)}"/>
-        />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -56,15 +56,18 @@ class SleepTrackerFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
         val viewModelFactory = SleepTrackerViewModelFactory(dataSource, application)
-
         val sleepTrackerViewModel: SleepTrackerViewModel by viewModels { viewModelFactory }
 
+        // This enable the use of LiveData directly in the layout XML file
+        // A lifecycle owner => LiveData will be paused or destroyed
+        // At correct time without further declaration
+        binding.lifecycleOwner = this
+        // A model to access data and onEvents methods
         binding.sleepTrackerViewModel = sleepTrackerViewModel
-        binding.setLifecycleOwner(this.viewLifecycleOwner)
 
         sleepTrackerViewModel.navigateToSleepQuality.observe(this, Observer { night ->
             night?.let {
-                this.findNavController().navigate(
+                findNavController().navigate(
                     SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepQualityFragment(
                         it.nightId
                     )
@@ -76,7 +79,7 @@ class SleepTrackerFragment : Fragment() {
         sleepTrackerViewModel.showSnackBarEvent.observe(this, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
+                    requireActivity().findViewById(android.R.id.content),
                     getString(R.string.cleared_message),
                     Snackbar.LENGTH_SHORT // How long to display the message.
                 ).show()

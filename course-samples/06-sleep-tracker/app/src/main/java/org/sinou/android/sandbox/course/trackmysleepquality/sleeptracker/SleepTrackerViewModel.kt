@@ -36,27 +36,19 @@ class SleepTrackerViewModel(
 ) : AndroidViewModel(application) {
 
     private val TAG = "SleepTrackerVM"
-
     private var viewModelJob = Job()
-
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    // Main data objects
     private var tonight = MutableLiveData<SleepNight?>()
-
     private val nights = database.getAllNights()
 
-    // Directly exposes transformed and ready to use string
+    // Directly exposes transformed and ready to use strings
     val nightsString = Transformations.map(nights) {nights ->
         formatNights(nights, application.resources)
     }
 
-    // Transform and expose current state as flags for the UI
+    // Transform and expose current state as flags for the layout to show/hides buttons
     val startButtonVisible = Transformations.map(tonight){
         null == it
     }
@@ -151,6 +143,9 @@ class SleepTrackerViewModel(
         }
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }
 
