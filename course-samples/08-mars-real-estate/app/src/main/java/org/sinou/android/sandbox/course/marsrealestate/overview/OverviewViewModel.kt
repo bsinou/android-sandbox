@@ -25,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.sinou.android.sandbox.course.marsrealestate.network.MarsApi
+import org.sinou.android.sandbox.course.marsrealestate.network.MarsProperty
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
@@ -34,12 +35,15 @@ class OverviewViewModel : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    // The internal MutableLiveData String that stores the status of the most recent request
-    private val _response = MutableLiveData<String>()
+    // Status of the most recent request
+    private val _status = MutableLiveData<String>()
+    val status: LiveData<String>
+        get() = _status
 
-    // The external immutable LiveData for the request status String
-    val response: LiveData<String>
-        get() = _response
+    private val _property = MutableLiveData<MarsProperty>()
+    val property: LiveData<MarsProperty>
+        get() = _property
+
 
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
@@ -53,9 +57,12 @@ class OverviewViewModel : ViewModel() {
             var getPropsDeferred = MarsApi.retrofitService.getProperties()
             try {
                 var listResult = getPropsDeferred.await()
-                _response.value = "Success: ${listResult.size} Mars properties retrieved"
+                if (listResult.size > 0) {
+                    _property.value = listResult[0]
+                }
+                _status.value = null // "Success: ${listResult.size} Mars properties retrieved"
             } catch (t: Throwable) {
-                _response.value = "Failure: ${t.message}"
+                _status.value = "Failure: ${t.message}"
             }
         }
     }
