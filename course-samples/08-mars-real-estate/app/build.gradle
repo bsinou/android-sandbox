@@ -57,23 +57,24 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version_kotlin"
+    // Core with Ktx
+    implementation "androidx.core:core-ktx:$version_core"
 
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
     // ViewModel and LiveData
-    // implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
-    // RecyclerView
-    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
-    // Core with Ktx
-    implementation "androidx.core:core-ktx:$version_core"
+    // Retrofit with the scalar converter
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
 
     // Moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
