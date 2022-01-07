@@ -8,7 +8,7 @@ buildscript {
 
         version_core = "1.7.0"
         version_kotlin_coroutines = "1.5.2"
-
+        version_kotlin_coroutines_android = "1.5.4"
         version_constraint_layout = "2.1.2"
         version_lifecycle = "2.4.0"
         version_navigation = "2.3.5"

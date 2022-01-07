@@ -20,16 +20,19 @@ package org.sinou.android.sandbox.course.marsrealestate.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.sinou.android.sandbox.course.marsrealestate.network.MarsApi
-import org.sinou.android.sandbox.course.marsrealestate.network.MarsProperty
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
  */
 class OverviewViewModel : ViewModel() {
+
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     // The internal MutableLiveData String that stores the status of the most recent request
     private val _response = MutableLiveData<String>()
@@ -45,22 +48,20 @@ class OverviewViewModel : ViewModel() {
         getMarsRealEstateProperties()
     }
 
-    /**
-     * Sets the value of the status LiveData to the Mars API status.
-     */
     private fun getMarsRealEstateProperties() {
+        coroutineScope.launch {
+            var getPropsDeferred = MarsApi.retrofitService.getProperties()
+            try {
+                var listResult = getPropsDeferred.await()
+                _response.value = "Success: ${listResult.size} Mars properties retrieved"
+            } catch (t: Throwable) {
+                _response.value = "Failure: ${t.message}"
+            }
+        }
+    }
 
-       MarsApi.retrofitService.getProperties().enqueue(object: Callback<List<MarsProperty>>{
-
-           override fun onResponse(call: Call<List<MarsProperty>>, response: Response<List<MarsProperty>>) {
-               _response.value = "Success: ${response.body()?.size} Mars properties retrieved"
-           }
-
-           override fun onFailure(call: Call<List<MarsProperty>>, t: Throwable) {
-               _response.value = "Failure: ${t.message}"
-           }
-       })
-
-        _response.value = "Set the Mars API Response here!"
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
