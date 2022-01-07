@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepNight
 import org.sinou.android.sandbox.course.trackmysleepquality.databinding.ListItemSleepNightBinding
-import org.sinou.android.sandbox.course.trackmysleepquality.generated.callback.OnClickListener
 
 class SleepNightAdapter(val clickListener: SleepNightListener) :
     ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Get via the ListAdapter to rely on DiffUtil
+        // Retrieve items via the ListAdapter to be able to rely on DiffUtil
         val item = getItem(position)
         holder.bind(item, clickListener)
     }
@@ -55,6 +54,6 @@ class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
     }
 }
 
-class SleepNightListener(val clickListener: (sleepId: Long) -> Unit){
+class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
     fun onClick(night: SleepNight) = clickListener(night.nightId)
 }
