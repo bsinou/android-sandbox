@@ -40,7 +40,6 @@ class SleepQualityFragment : Fragment() {
 
     val args: SleepQualityFragmentArgs by navArgs()
 
-
     /**
      * Called when the Fragment is ready to display content to the screen.
      *

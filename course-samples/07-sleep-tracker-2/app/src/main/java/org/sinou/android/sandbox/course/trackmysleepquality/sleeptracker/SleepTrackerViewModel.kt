@@ -52,36 +52,45 @@ class SleepTrackerViewModel(
     val nights = database.getAllNights()
 
     // Directly exposes transformed and ready to use string
-    val nightsString = Transformations.map(nights) {nights ->
+    val nightsString = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
     }
 
     // Transform and expose current state as flags for the UI
-    val startButtonVisible = Transformations.map(tonight){
+    val startButtonVisible = Transformations.map(tonight) {
         null == it
     }
-    val stopButtonVisible = Transformations.map(tonight){
+    val stopButtonVisible = Transformations.map(tonight) {
         null != it
     }
-    val clearButtonVisible = Transformations.map(nights){
+    val clearButtonVisible = Transformations.map(nights) {
         it?.isNotEmpty()
     }
 
-    // Event-like flag to manage transition to sleep quality screen
+    // Event-like flag to manage transition to other screens
     private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
     val navigateToSleepQuality: LiveData<SleepNight>
         get() = _navigateToSleepQuality
 
-    fun doneNavigating(){
+    fun doneNavigating() {
         _navigateToSleepQuality.value = null
     }
+
+    private val _navigateToSleepDataQuality = MutableLiveData<Long>()
+    val navigateToSleepDataQuality: LiveData<Long>
+        get() = _navigateToSleepDataQuality
+
+    fun onSleepDataQualityNavigated() {
+        _navigateToSleepDataQuality.value = null
+    }
+
 
     // Event-like flag to manage the Snack bar
     private val _showSnackBarEvent = MutableLiveData<Boolean>()
     val showSnackBarEvent: LiveData<Boolean>
         get() = _showSnackBarEvent
 
-    fun doneShowing(){
+    fun doneShowing() {
         _showSnackBarEvent.value = false
     }
 
@@ -128,6 +137,10 @@ class SleepTrackerViewModel(
             update(oldNight)
             _navigateToSleepQuality.value = oldNight
         }
+    }
+
+    fun onSleepNightClicked(nightId: Long) {
+        _navigateToSleepDataQuality.value = nightId
     }
 
     private suspend fun update(night: SleepNight) {
