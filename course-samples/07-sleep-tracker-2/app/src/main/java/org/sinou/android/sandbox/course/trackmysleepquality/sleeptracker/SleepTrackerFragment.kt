@@ -20,14 +20,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import org.sinou.android.sandbox.course.trackmysleepquality.R
 import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepDatabase
+import org.sinou.android.sandbox.course.trackmysleepquality.database.SleepNight
 import org.sinou.android.sandbox.course.trackmysleepquality.databinding.FragmentSleepTrackerBinding
 
 /**
@@ -36,7 +42,6 @@ import org.sinou.android.sandbox.course.trackmysleepquality.databinding.Fragment
  * (Because we have not learned about RecyclerView yet.)
  */
 class SleepTrackerFragment : Fragment() {
-
 
     /**
      * Called when the Fragment is ready to display content to the screen.
@@ -62,17 +67,33 @@ class SleepTrackerFragment : Fragment() {
         binding.sleepTrackerViewModel = sleepTrackerViewModel
         binding.lifecycleOwner = this
 
-        val adapter = SleepNightAdapter()
-        binding.sleepList.adapter = adapter
+        val asGrid = false;
+        if (asGrid) {
+            val manager = GridLayoutManager(activity, 3)
+            binding.sleepList.layoutManager = manager
+            val adapter = SleepNightGridAdapter()
+            binding.sleepList.adapter = adapter
+            sleepTrackerViewModel.nights.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
 
-        sleepTrackerViewModel.nights.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                // When Adapter is a List adapter
-                adapter.submitList(it)
-                // A la bourrin
-                // adapter.data = it
-            }
-        })
+        } else {
+            val manager = LinearLayoutManager(activity)
+            binding.sleepList.layoutManager = manager
+            val adapter = SleepNightAdapter(SleepNightListener { nightId ->
+                sleepTrackerViewModel.onSleepNightClicked(nightId)
+                // Toast.makeText(context, "${nightId}", Toast.LENGTH_LONG).show()
+            })
+            binding.sleepList.adapter = adapter
+            sleepTrackerViewModel.nights.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
+
+        }
 
         sleepTrackerViewModel.navigateToSleepQuality.observe(this, Observer { night ->
             night?.let {
@@ -82,6 +103,13 @@ class SleepTrackerFragment : Fragment() {
                     )
                 )
                 sleepTrackerViewModel.doneNavigating()
+            }
+        })
+
+        sleepTrackerViewModel.navigateToSleepDataQuality.observe(this, {nightId ->
+            nightId?.let{
+                findNavController().navigate(SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepDetailFragment(nightId))
+                sleepTrackerViewModel.onSleepDataQualityNavigated()
             }
         })
 
