@@ -44,6 +44,10 @@ class OverviewViewModel : ViewModel() {
     val property: LiveData<MarsProperty>
         get() = _property
 
+    private val _properties = MutableLiveData<List<MarsProperty>>()
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
+
 
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
@@ -58,7 +62,7 @@ class OverviewViewModel : ViewModel() {
             try {
                 var listResult = getPropsDeferred.await()
                 if (listResult.size > 0) {
-                    _property.value = listResult[0]
+                    _properties.value = listResult
                 }
                 _status.value = null // "Success: ${listResult.size} Mars properties retrieved"
             } catch (t: Throwable) {

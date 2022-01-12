@@ -28,6 +28,10 @@ Note: If you encounter a command not found error, you must add the path to the t
 
 Below are some links to internet resources that have prove useful while doing first hops in the wonderful Android world:
 
+### Android Pattern / Examples
+
+- [Add a splash screen](https://www.tiagoloureiro.tech/posts/definitive-guide-for-splash-screen-android/): "the definitive guide for android Splashscreen
+
 ### Relevant training and sample
 
 These links seem to be kept up-to-date with latest versions of the libraries and are good places to stop once you are more familiar with the framework, a.k.a after the various bootcamps, as a reference for real life use:
@@ -40,6 +44,7 @@ These links seem to be kept up-to-date with latest versions of the libraries and
 
 Some Gotchas in kotlin:
 
+- [Decorator pattern (by) in 30 seconds](https://medium.com/@HugoMatilla/kotlin-patterns-decorator-pattern-with-class-delegates-982d43305681)
 - [Kotlin ‘By’ Property Delegation: Create Reusable Code](https://medium.com/rocket-fuel/kotlin-by-property-delegation-create-reusable-code-f2bc2253e227)
 
 ### From android courses
