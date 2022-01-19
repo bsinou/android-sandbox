@@ -47,6 +47,10 @@ Some Gotchas in kotlin:
 - [Decorator pattern (by) in 30 seconds](https://medium.com/@HugoMatilla/kotlin-patterns-decorator-pattern-with-class-delegates-982d43305681)
 - [Kotlin ‘By’ Property Delegation: Create Reusable Code](https://medium.com/rocket-fuel/kotlin-by-property-delegation-create-reusable-code-f2bc2253e227)
 
+### Troubleshooting
+
+- [an interresting post about _hidden method access_ warning](https://stackoverflow.com/questions/66290732/how-to-identify-what-is-accessing-hidden-methods)
+
 ### From android courses
 
 While following Android's bootcamp, these links seemed worth:
@@ -60,6 +64,7 @@ While following Android's bootcamp, these links seemed worth:
 - [The Android Lifecycle cheat sheet - part I](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab): Single Activity - This is a visual recap of much of the material here.
 - [The Android Lifecycle cheat sheet - part II](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-ii-multiple-activities-a411fd139f24): Multiple Activities - This shows the order of lifecycle calls when two activities interact.
 - [The Android Lifecycle cheat sheet - part III](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd): Fragments - This show the order of lifecycle calls when an activity and fragment interact.
+- [When to load data into view model](https://proandroiddev.com/when-to-load-data-in-viewmodels-ad9616940da7)
 
 #### Coroutines and background work
 
