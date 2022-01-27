@@ -65,6 +65,7 @@ While following Android's bootcamp, these links seemed worth:
 - [The Android Lifecycle cheat sheet - part II](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-ii-multiple-activities-a411fd139f24): Multiple Activities - This shows the order of lifecycle calls when two activities interact.
 - [The Android Lifecycle cheat sheet - part III](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd): Fragments - This show the order of lifecycle calls when an activity and fragment interact.
 - [When to load data into view model](https://proandroiddev.com/when-to-load-data-in-viewmodels-ad9616940da7)
+- [Observe network status](https://betterprogramming.pub/how-to-monitor-internet-connection-in-android-using-kotlin-and-livedata-135de9447796)
 
 #### Coroutines and background work
 
