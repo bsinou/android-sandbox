@@ -13,6 +13,7 @@ In addition, it also covers how to use
 periodic work. In this app it's used to setup a daily background data sync.
 
 ## Report Issues
+
 Notice any issues with a repository? Please file a github issue in the repository.
 
 
