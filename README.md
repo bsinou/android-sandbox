@@ -51,6 +51,11 @@ Some Gotchas in kotlin:
 
 - [an interresting post about _hidden method access_ warning](https://stackoverflow.com/questions/66290732/how-to-identify-what-is-accessing-hidden-methods)
 
+### Theming
+
+-  [About theme overlay](https://ataulm.com/2019/10/14/using-material-theme-overlay.html)
+- The [reference talk about theming in android](https://www.youtube.com/watch?v=Owkf8DhAOSo): Developing themes with style @ Android Dev Summit '19
+
 ### From android courses
 
 While following Android's bootcamp, these links seemed worth:
@@ -84,7 +89,6 @@ While following Android's bootcamp, these links seemed worth:
 - [About migration with Room](https://developer.android.com/training/data-storage/room/migrating-db-versions)
 - On Medium, [Understanding migration with Room](https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929)
 - Also on Medium, [Testing migrations with Room](https://medium.com/androiddevelopers/testing-room-migrations-be93cdb0d975)
-
 
 ### Misceleneous 
 
