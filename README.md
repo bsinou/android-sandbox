@@ -47,6 +47,13 @@ Some Gotchas in kotlin:
 - [Decorator pattern (by) in 30 seconds](https://medium.com/@HugoMatilla/kotlin-patterns-decorator-pattern-with-class-delegates-982d43305681)
 - [Kotlin ‘By’ Property Delegation: Create Reusable Code](https://medium.com/rocket-fuel/kotlin-by-property-delegation-create-reusable-code-f2bc2253e227)
 
+#### Dependency injection with koin
+
+- A [nice introduction](https://meghavaishy.medium.com/understanding-koin-basics-7f4c2b763985)
+- How to handle [Room DBs with koin](https://medium.com/android-news/painless-android-testing-with-room-koin-bb949eefcbee) and bootstrap your tests
+- The [official documentation](https://insert-koin.io)
+
+
 ### Troubleshooting
 
 - [an interresting post about _hidden method access_ warning](https://stackoverflow.com/questions/66290732/how-to-identify-what-is-accessing-hidden-methods)
@@ -63,6 +70,7 @@ While following Android's bootcamp, these links seemed worth:
 #### Layouts
 
 - [About re-usable layouts](https://developer.android.com/training/improving-layouts/reusing-layouts), sepcifically about `<include />` and `<merge />` tags.
+- About [constraint layouts and chaining](https://developer.android.com/reference/androidx/constraintlayout/widget/ConstraintLayout#CenteringPositioning)
 
 #### Lifecycles
 
