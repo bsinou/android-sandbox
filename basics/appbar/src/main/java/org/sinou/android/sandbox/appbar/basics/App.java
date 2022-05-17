@@ -1,6 +1,5 @@
 package org.sinou.android.sandbox.appbar.basics;
 
-
 import android.app.Application;
 
 public class App extends Application {
@@ -9,4 +8,5 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
     }
+    
 }
