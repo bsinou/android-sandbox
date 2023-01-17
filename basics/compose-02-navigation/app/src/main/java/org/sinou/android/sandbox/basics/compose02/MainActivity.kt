@@ -7,11 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,6 +22,7 @@ sealed class Destination(val route: String) {
     object List : Destination("list")
     object Detail : Destination("detail/{elementId}") {
         fun createRoute(elementId: Int) = "detail/$elementId"
+        fun getPathKey() = "elementId"
     }
 }
 
@@ -47,12 +46,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationAppHost(navController: NavHostController) {
     val ctx = LocalContext.current
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(navController = navController, startDestination = Destination.Home.route) {
         composable(Destination.Home.route) { HomeScreen(navController) }
         composable(Destination.Profile.route) { ProfileScreen() }
         composable(Destination.List.route) { ListScreen(navController) }
         composable(Destination.Detail.route) { navBackStackEntry ->
-            val elementId = navBackStackEntry.arguments?.getString("elementId")
+            val elementId = navBackStackEntry.arguments?.getString(Destination.Detail.getPathKey())
             if (elementId == null) {
                 Toast.makeText(ctx, "no element id", Toast.LENGTH_LONG).show()
             } else {
