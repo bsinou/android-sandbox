@@ -1,0 +1,2 @@
+rootProject.name = "ComposeCodeLab - Advanced State and Side effects"
+include ':app'
