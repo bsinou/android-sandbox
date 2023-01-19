@@ -13,13 +13,38 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.sinou.android.sandbox.basics.compose04.model.WellnessTask
 import org.sinou.android.sandbox.basics.compose04.model.WellnessTaskList
+import org.sinou.android.sandbox.basics.compose04.model.WellnessViewModel
 import org.sinou.android.sandbox.basics.compose04.ui.theme.Compose04BasicStateTheme
 
+@Composable
+fun WellnessScreen(
+    modifier: Modifier = Modifier,
+    wellnessVM: WellnessViewModel = viewModel()
+) {
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(4.dp)
+    ) {
+
+        // Third pass
+        StatefulCounter(modifier)
+        WellnessTaskList(
+            tasks = wellnessVM.tasks,
+            onCheckedTask = { task, checked ->
+                wellnessVM.changeTaskChecked(task, checked)
+            },
+            onCloseTask = wellnessVM::remove
+        )
+    }
+}
+
+
 /**
- * Interesting notes from the codelab:
- *
  * Note:
  * If you type WC in the editor area in Android Studio, it opens a suggestion box.
  * If you press Enter and select the first option, a Column template appears ready to use.
@@ -27,7 +52,7 @@ import org.sinou.android.sandbox.basics.compose04.ui.theme.Compose04BasicStateTh
  * More about this at https://developer.android.com/jetpack/compose/tooling#editor-actions .
  */
 @Composable
-fun WellnessScreen(modifier: Modifier = Modifier) {
+fun WellnessScreen_noViewModel(modifier: Modifier = Modifier) {
 
     Column(
         modifier = modifier
@@ -70,7 +95,12 @@ fun WellnessScreen(modifier: Modifier = Modifier) {
         *
         */
 
-        WellnessTaskList(tasks = list, onCloseTask = { task -> list.remove(task) })
+        // So that it still compiles during last (3rd) pass.
+        val dummyNoOpLambda: (WellnessTask, Boolean) -> Unit = { task, checked -> }
+        WellnessTaskList(
+            tasks = list,
+            onCheckedTask = dummyNoOpLambda,
+            onCloseTask = { task -> list.remove(task) })
     }
 }
 
@@ -82,5 +112,5 @@ fun WellnessScreenPreview() {
     }
 }
 
-// Helpers
+//// Helpers
 private fun getWellnessTasks() = List(30) { i -> WellnessTask(i, "Task # $i") }

@@ -21,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sinou.android.sandbox.basics.compose04.ui.theme.Compose04BasicStateTheme
 
-
 @Composable
 fun WellnessTaskItem(
     taskName: String,
